@@ -3,11 +3,11 @@
 namespace Maba\Bundle\WebpackBundle\Tests\Service;
 
 use Codeception\TestCase\Test;
+use Exception;
 use Maba\Bundle\WebpackBundle\Exception\AssetNotFoundException;
 use Maba\Bundle\WebpackBundle\Service\AliasManager;
 use Maba\Bundle\WebpackBundle\Service\AssetLocator;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use Exception;
 use RuntimeException;
 
 class AssetLocatorTest extends Test
@@ -16,7 +16,7 @@ class AssetLocatorTest extends Test
      * @param string|Exception $expected
      * @param string $asset
      * @param string|null $expectedAlias
-     * @param string|null|Exception $aliasPath
+     * @param string|Exception|null $aliasPath
      * @dataProvider locateAssetProvider
      */
     public function testLocateAsset($expected, $asset, $expectedAlias = null, $aliasPath = null)
@@ -37,7 +37,7 @@ class AssetLocatorTest extends Test
      * @param string|Exception $expected
      * @param string $asset
      * @param string|null $expectedAlias
-     * @param string|null|Exception $aliasPath
+     * @param string|Exception|null $aliasPath
      * @dataProvider dataProviderTestLocateAssetWithCustomPrefix
      */
     public function testLocateAssetWithCustomPrefix($expected, $asset, $expectedAlias = null, $aliasPath = null)

@@ -24,8 +24,8 @@ class Configuration implements ConfigurationInterface
 
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('maba_webpack');
+        $treeBuilder = new TreeBuilder('maba_webpack');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootChildren = $rootNode->children();
 

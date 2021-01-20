@@ -146,7 +146,7 @@ EOT
     private function outputAdditionalActions(OutputInterface $output, array $filesForGit)
     {
         $notice = <<<'NOTICE'
-        
+
 <bold>Additional actions needed</bold>
 
 I would suggest to add the following into your git repository:
