@@ -66,19 +66,21 @@ class InstallAssetsHelper
         return null;
     }
 
-    public function installNodeModules($mode, InputInterface $input, OutputInterface $output)
+    public function installNodeModules($mode, InputInterface $input, OutputInterface $output): ?int
     {
         $process = new Process(
             $mode === self::MODE_YARN ? ['yarn', 'install'] : ['npm', 'install'],
             $this->rootDirectory
         );
         if (!$this->askIfInstallNeeded($input, $output, $process)) {
-            return;
+            return 0;
         }
 
         $this->configureTty($process);
 
         $this->runProcess($process, $output);
+
+        return $process->getExitCode();
     }
 
     private function outputYarnDependencyError(OutputInterface $output)
