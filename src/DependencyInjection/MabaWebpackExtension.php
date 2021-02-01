@@ -39,7 +39,9 @@ class MabaWebpackExtension extends Extension
     private function configureTwig(ContainerBuilder $container, array $config)
     {
         $twigDirectories = $config['twig']['additional_directories'];
-        $twigDirectories[] = '%kernel.root_dir%/Resources/views';
+        if ($container->hasParameter('kernel.root_dir')) {
+            $twigDirectories[] = '%kernel.root_dir%/Resources/views';
+        }
         if ($container->hasParameter('kernel.project_dir')) {
             $twigDirectories[] = '%kernel.project_dir%/templates';
         }
@@ -73,9 +75,11 @@ class MabaWebpackExtension extends Extension
 
     private function configureAliases(ContainerBuilder $container, $config)
     {
-        $defaultAliases = [
-            'app' => '%kernel.root_dir%/Resources/assets',
-        ];
+        $defaultAliases = [];
+        if ($container->hasParameter('kernel.root_dir')) {
+            $defaultAliases['app'] = '%kernel.root_dir%/Resources/assets';
+        }
+
         if ($container->hasParameter('kernel.project_dir')) {
             $defaultAliases['root'] = '%kernel.project_dir%';
             $defaultAliases['templates'] = '%kernel.project_dir%/templates';
